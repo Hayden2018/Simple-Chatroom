@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>User List</title>
+    <script>
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    buildPage(this);
+                }
+            };
+            // Need random version too prevent xml cache
+            xhttp.open("GET", "chatroom.xml?version=" + Math.random(), true);
+            xhttp.send();
+        }
+        function buildPage(xml) {
+            let xmlDoc = xml.responseXML;
+            let table = document.getElementById("list");
+            let users = xmlDoc.getElementsByTagName("user");
+            table.style = "width:380px; text-align:center; border:2px solid grey; border-collapse: collapse";
+            table.innerHTML = "<tr><th></th><th>User Name</th><tr>";
+            for (let i = 0; i < users.length; i++) {
+                let row = document.createElement("tr");
+                let picCol = document.createElement("td");
+                let nameCol = document.createElement("td");
+                let pic = document.createElement("img");
+                pic.src = users[i].getAttribute('photo');
+                row.style = "border-top: 2px solid grey";
+                pic.style = "width:50px; height:50px; padding-top:3px; padding-bottom:3px";
+                picCol.style = "width:60px";
+                nameCol.innerHTML = users[i].getAttribute('name');
+                picCol.appendChild(pic);
+                row.appendChild(picCol);
+                row.appendChild(nameCol);
+                table.appendChild(row);
+            }
+        }
+    </script>
+</head>
+
+<body onload="loadDoc()" style="background: #e0e0ff; width:350px">
+    <table id='list'></table>
+</body>
+
+</html>

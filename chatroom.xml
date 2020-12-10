@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chatroom [
+<!ELEMENT chatroom (users , messages)>
+<!ELEMENT users (user)*>
+<!ELEMENT messages (message)*>
+<!ELEMENT user (#PCDATA)>
+<!ATTLIST user name CDATA #REQUIRED>
+<!ATTLIST user photo CDATA #REQUIRED>
+<!ATTLIST user id ID #REQUIRED>
+<!ELEMENT message (#PCDATA)>
+<!ATTLIST message name CDATA #REQUIRED>
+<!ATTLIST message color CDATA #REQUIRED>
+]>
+<chatroom>
+  <users>
+    <user name="Bob" id="a5fc712c862268" photo="photo/a5fc712c862268sample2.jpg"/>
+    <user name="Henry" id="a5fc713f24e5c4" photo="photo/a5fc713f24e5c4sample1.jpg"/>
+  </users>
+  <messages>
+    <message name="Alice" color="black">Where can I find information?</message>
+    <message name="Bob" color="blue">You can go to http://www.google.com/</message>
+    <message name="Alice" color="red">Amazing</message>
+    <message name="Henry" color="green">Clever!</message>
+  </messages>
+</chatroom>
